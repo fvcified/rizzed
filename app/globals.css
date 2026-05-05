@@ -1,11 +1,6 @@
-@import "tailwindcss";
-
-@theme {
-  --font-outfit: "Outfit", sans-serif;
-  --font-inter: "Inter", sans-serif;
-  --color-text-primary: #3a3a3a;
-  --color-text-muted: #6b6b6b;
-}
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 @keyframes fadeCur {
   0%, 100% { opacity: 0; }

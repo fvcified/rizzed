@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import { Outfit, Inter } from "next/font/google";
-// @ts-expect-error: allow importing global CSS without type declarations
 import "./globals.css";
 
 const outfit = Outfit({
