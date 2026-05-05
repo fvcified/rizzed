@@ -1,6 +1,6 @@
 # A rizzed kid
 
-Built with **Next.js 15** + **React 19** + **TypeScript**.
+🛠️ Built with **Next.js 15** + **React 19** + **TypeScript**.
 
 ## Stack
 
