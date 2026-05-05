@@ -8,7 +8,7 @@ interface FooterIconProps {
   alt: string;
 }
 
-export default function FooterIcon({ href, tooltip, src, alt }: FooterIconProps) {
+export default function footerIcon({ href, tooltip, src, alt }: FooterIconProps) {
   return (
     <Link
       href={href}
