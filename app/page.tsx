@@ -1,7 +1,7 @@
 import Link from "next/link";
-import TypedText from "@/components/typedText";
-import TitleAnimator from "@/components/titleAnimator";
-import FooterIcon from "@/components/footerIcon";
+import TypedText from "@/components/TypedText";
+import TitleAnimator from "@/components/TitleAnimator";
+import FooterIcon from "@/components/FooterIcon";
 
 const socialLinks = [
   {
