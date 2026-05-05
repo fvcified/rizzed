@@ -8,7 +8,7 @@ interface FooterIconProps {
   alt: string;
 }
 
-export default function footerIcon({ href, tooltip, src, alt }: FooterIconProps) {
+export default function FooterIcon({ href, tooltip, src, alt }: FooterIconProps) {
   return (
     <Link
       href={href}
@@ -26,7 +26,6 @@ export default function footerIcon({ href, tooltip, src, alt }: FooterIconProps)
           w-8 h-8 cursor-pointer
           brightness-0 saturate-100 invert-[26%]
           transition-all duration-300 ease-in-out
-          sm:w-[26px] sm:h-[26px]
         "
       />
     </Link>
