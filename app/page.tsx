@@ -1,7 +1,7 @@
 import Link from "next/link";
-import TypedText from "@/components/TypedText";
-import TitleAnimator from "@/components/TitleAnimator";
-import FooterIcon from "@/components/FooterIcon";
+import TypedText from "@/components/typedText";
+import TitleAnimator from "@/components/titleAnimator";
+import FooterIcon from "@/components/footerIcon";
 
 const socialLinks = [
   {
@@ -34,25 +34,56 @@ export default function Home() {
   return (
     <>
       <TitleAnimator />
-      <main>
-        <div className="container">
-          <div className="square">
-            <div className="details">
-              <h1 className="centered">
+      <main className="w-full min-h-screen flex items-center justify-center pb-20">
+        <div className="flex flex-col items-center w-full px-5">
+
+          <div
+            style={{ width: "min(500px, 90vw)" }}
+            className="
+              text-center
+              bg-[rgba(103,103,103,0.065)]
+              border border-[rgba(0,0,0,0.065)]
+              rounded-xl
+              shadow-[2px_2px_2px_rgba(0,0,0,0.26)]
+              px-5 pt-8 pb-6
+              overflow-hidden
+            "
+          >
+
+            <div className="text-center">
+              <h1
+                className="
+                  inline-flex items-center justify-center
+                  text-[#3a3a3a] font-outfit
+                  font-bold leading-none my-[5px] break-words
+                "
+                style={{ fontSize: "clamp(48px, 13vw, 75px)" }}
+              >
                 <TypedText />
-                <span className="cursor">_</span>
+                <span className="animate-cursor text-[#3a3a3a]">_</span>
               </h1>
-              <p className="centered">
+
+              <p
+                className="
+                  text-[#6b6b6b] font-inter
+                  font-semibold mt-2.5 leading-relaxed break-words
+                "
+                style={{ fontSize: "clamp(12px, 3vw, 15px)" }}
+              >
                 Informatics Engineering Student ; Developer &amp; Builder ; Tech
                 &amp; Cybersecurity Enthusiast ; Research
               </p>
             </div>
 
-            <div className="links">
+            <div
+              className="mt-[18px] text-center text-[#6b6b6b] font-outfit"
+              style={{ fontSize: "clamp(12px, 3vw, 15px)" }}
+            >
               <Link
                 href="https://dontasktoask.com/"
                 target="_blank"
                 rel="noopener noreferrer"
+                className="text-[rgba(58,58,58,0.67)] no-underline hover:underline hover:text-[rgba(58,58,58,1)] transition-colors duration-200"
               >
                 dontasktoask
               </Link>
@@ -61,7 +92,7 @@ export default function Home() {
                 href="https://fvkidsite.vercel.app/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="copyright-link"
+                className="inline-block relative text-[rgba(58,58,58,0.67)] no-underline hover:bg-[#ababab] hover:rounded-sm transition-all duration-150"
               >
                 <span>{"{ fvkid.site }"}</span>
               </Link>
@@ -70,6 +101,7 @@ export default function Home() {
                 href="https://itsmy.gitbook.io/user/"
                 target="_blank"
                 rel="noopener noreferrer"
+                className="text-[rgba(58,58,58,0.67)] no-underline hover:underline hover:text-[rgba(58,58,58,1)] transition-colors duration-200"
               >
                 README
               </Link>
@@ -78,12 +110,13 @@ export default function Home() {
                 href="https://noskid.today/"
                 target="_blank"
                 rel="noopener noreferrer"
+                className="text-[rgba(58,58,58,0.67)] no-underline hover:underline hover:text-[rgba(58,58,58,1)] transition-colors duration-200"
               >
                 no fvskid
               </Link>
             </div>
 
-            <div className="footer-icons">
+            <div className="flex items-center justify-center flex-wrap gap-[1.3em] mt-5 pt-5">
               {socialLinks.map((link) => (
                 <FooterIcon
                   key={link.alt}
@@ -95,6 +128,7 @@ export default function Home() {
               ))}
             </div>
           </div>
+
         </div>
       </main>
     </>

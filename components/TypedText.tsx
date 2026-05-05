@@ -28,13 +28,8 @@ export default function TypedText() {
       if (el) el.textContent = val;
     }
 
-    function sSL(
-      targetText: string,
-      index: number,
-      doneCallback: () => void
-    ) {
+    function sSL(targetText: string, index: number, doneCallback: () => void) {
       let count = 0;
-
       function step() {
         if (cancelled) return;
         if (count < SCRAMBLE_PLC) {
@@ -46,63 +41,40 @@ export default function TypedText() {
           doneCallback();
         }
       }
-
       step();
     }
 
     function typeScr(targetText: string, callback: () => void) {
       let idx = 0;
-
       function typeNext() {
         if (cancelled) return;
-        if (idx >= targetText.length) {
-          callback();
-          return;
-        }
-        sSL(targetText, idx, () => {
-          idx++;
-          typeNext();
-        });
+        if (idx >= targetText.length) { callback(); return; }
+        sSL(targetText, idx, () => { idx++; typeNext(); });
       }
-
       typeNext();
     }
 
-    function rDFE(
-      currentText: string,
-      targetKeepText: string,
-      callback: () => void
-    ) {
+    function rDFE(currentText: string, targetKeepText: string, callback: () => void) {
       let cur = currentText;
-
       function deleteStep() {
         if (cancelled) return;
-        if (cur === targetKeepText) {
-          callback();
-          return;
-        }
+        if (cur === targetKeepText) { callback(); return; }
         cur = cur.substring(0, cur.length - 1);
         setText(cur);
         setTimeout(deleteStep, SCRAMBLE_SPD);
       }
-
       deleteStep();
     }
 
     function rTE(currentText: string, callback: () => void) {
       let cur = currentText;
-
       function deleteStep() {
         if (cancelled) return;
-        if (cur.length === 0) {
-          callback();
-          return;
-        }
+        if (cur.length === 0) { callback(); return; }
         cur = cur.substring(0, cur.length - 1);
         setText(cur);
         setTimeout(deleteStep, SCRAMBLE_SPD);
       }
-
       deleteStep();
     }
 
@@ -113,7 +85,6 @@ export default function TypedText() {
           rDFE(iniTxt, keepText, () => {
             setTimeout(() => {
               let idx = 0;
-
               function typeAppend() {
                 if (cancelled) return;
                 if (idx >= appendTxt.length) {
@@ -124,14 +95,9 @@ export default function TypedText() {
                   }, 3000);
                   return;
                 }
-
                 const target = keepText + appendTxt.substring(0, idx + 1);
-                sSL(target, target.length - 1, () => {
-                  idx++;
-                  typeAppend();
-                });
+                sSL(target, target.length - 1, () => { idx++; typeAppend(); });
               }
-
               typeAppend();
             }, 1500);
           });
@@ -140,11 +106,8 @@ export default function TypedText() {
     }
 
     runSequence();
-
-    return () => {
-      cancelled = true;
-    };
+    return () => { cancelled = true; };
   }, []);
 
-  return <span ref={textRef} id="typedText" />;
+  return <span ref={textRef} />;
 }

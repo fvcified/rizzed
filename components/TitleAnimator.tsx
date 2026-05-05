@@ -27,11 +27,7 @@ export default function TitleAnimator() {
     }
 
     const initial = setTimeout(titleTtl, 3000);
-
-    return () => {
-      clearTimeout(initial);
-      clearTimeout(timer);
-    };
+    return () => { clearTimeout(initial); clearTimeout(timer); };
   }, []);
 
   return null;

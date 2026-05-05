@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Outfit, Inter } from "next/font/google";
+// @ts-expect-error: allow importing global CSS without type declarations
 import "./globals.css";
 
 const outfit = Outfit({
@@ -19,7 +20,9 @@ export const metadata: Metadata = {
   description: "A rizzed kid",
   authors: [{ name: "xli" }],
   keywords: ["rizzed"],
-  themeColor: "#6E0F1A",
+  icons: {
+    icon: "/images/cook13.webp",
+  },
   openGraph: {
     title: "rizzed",
     description: "A rizzed kid",
@@ -40,7 +43,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${outfit.variable} ${inter.variable}`}>{children}</body>
+      <body
+        className={`${outfit.variable} ${inter.variable} bg-[#efefef] min-h-screen w-full flex items-center justify-center overflow-x-hidden`}
+      >
+        {children}
+      </body>
     </html>
   );
 }
