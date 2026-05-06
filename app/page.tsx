@@ -89,7 +89,7 @@ export default function Home() {
               </Link>
               {" ; "}
               <Link
-                href="https://fvkidsite.vercel.app/"
+                href="https://rizzedpage.vercel.app/"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-block relative text-[rgba(58,58,58,0.67)] no-underline hover:bg-[#ababab] hover:rounded-sm transition-all duration-150"
