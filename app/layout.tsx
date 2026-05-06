@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Outfit, Inter } from "next/font/google";
 import "./style.css";
 
@@ -14,10 +14,14 @@ const inter = Inter({
   variable: "--font-inter",
 });
 
+export const viewport: Viewport = {
+  themeColor: '#6E0F1A',
+}
+
 export const metadata: Metadata = {
   title: "rizzed",
   description: "A rizzed kid",
-  authors: [{ name: "xli" }],
+  authors: [{ name: "Xiao Xli" }],
   keywords: ["rizzed"],
   icons: {
     icon: "/images/cook13.webp",
