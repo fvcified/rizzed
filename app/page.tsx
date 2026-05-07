@@ -98,7 +98,7 @@ export default function Home() {
                 href="https://rizzedpage.vercel.app/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-block relative text-[rgba(58,58,58,0.67)] no-underline hover:bg-[#ababab] hover:rounded-sm transition-all duration-150"
+                className="inline-block relative text-[rgba(58,58,58,0.67)] hover:underline hover:bg-[#ababab] hover:rounded-sm transition-all duration-150"
               >
                 <span>{"{ fvkid.site }"}</span>
               </Link>
