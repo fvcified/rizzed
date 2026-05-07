@@ -4,6 +4,12 @@ import TitleAnimator from "@/components/TitleAnimator";
 import FooterIcon from "@/components/FooterIcon";
 
 const socialLinks = [
+  {  
+    href: "https://discord.com/users/385617865820209172",
+    tooltip: "discord/fvcified",
+    src: "/images/discord.svg",
+    alt: "Discord",
+  },
   {
     href: "https://github.com/fvcified",
     tooltip: "github/fvcified",
