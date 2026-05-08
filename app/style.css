@@ -2,12 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
-html,
-body {
-  background: #000 !important;
-  color: #fff;
+html, body {
   margin: 0;
   padding: 0;
+  background-color: rgb(8, 7, 6);
+  background-attachment: fixed;
+  min-height: 100vh;
 }
 
 @keyframes fadeCur {

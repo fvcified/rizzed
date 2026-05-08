@@ -67,134 +67,146 @@ export default function Home() {
       <div style={{ height: "500vh" }} />
 
       {sectionPhase > 0 && (
-        <div
-          className="fixed"
-          style={{
-            left:          "50%",
-            top:           "50%",
-            transform:     "translate(-50%, -50%)",
-            width:         "min(520px, 90vw)",
-            zIndex:        10,
-            pointerEvents: sectionPhase > 0.85 ? "auto" : "none",
-          }}
-        >
-
+        <>
           <div
+            className="fixed pointer-events-none"
             style={{
-              opacity:       stagger(0),
-              transform:     `translateY(${(1 - stagger(0)) * 18}px)`,
-              textAlign:     "center",
-              marginBottom:  "12px",
-              transition:    "none",
+              left:          "50%",
+              top:           "50%",
+              transform:     "translate(-50%, -50%)",
+              width:         "560px",
+              height:        "560px",
+              zIndex:        9,
+              opacity:       Math.min(1, sectionPhase * 1.8),
+              background:    "radial-gradient(circle, rgba(255,255,255,0.07) 0%, rgba(255,255,255,0.025) 40%, transparent 70%)",
+              borderRadius:  "50%",
+              pointerEvents: "none",
             }}
-          >
-            <h1
-              className="font-outfit font-bold leading-none break-words"
-              style={{
-                fontSize:      "clamp(36px, 7vw, 64px)",
-                letterSpacing: "-0.025em",
-                color:         "#ffffff",
-                textShadow:    "0 2px 24px rgba(0,0,0,0.8)",
-              }}
-            >
-              <TypedText />
-              <span className="animate-cursor" style={{ color: "#ffffff" }}>_</span>
-            </h1>
-          </div>
-
+          />
           <div
+            className="fixed"
             style={{
-              opacity:      stagger(1),
-              transform:    `translateY(${(1 - stagger(1)) * 18}px)`,
-              textAlign:    "center",
-              marginBottom: "14px",
-            }}
-          >
-            <p
-              className="font-inter font-semibold leading-relaxed"
-              style={{
-                fontSize:   "clamp(11px, 1.3vw, 13px)",
-                color:      "rgba(200,200,200,0.85)",
-                textShadow: "0 1px 12px rgba(0,0,0,0.9)",
-              }}
-            >
-              Informatics Engineering Student ; Developer &amp; Builder<br />
-              Tech &amp; Cybersecurity Enthusiast ; Research
-            </p>
-          </div>
-
-          <div
-            style={{
-              opacity:      stagger(2),
-              transform:    `translateY(${(1 - stagger(2)) * 18}px)`,
-              textAlign:    "center",
-              marginBottom: "40px",
+              left:          "50%",
+              top:           "50%",
+              transform:     "translate(-50%, -50%)",
+              width:         "min(520px, 90vw)",
+              zIndex:        10,
+              pointerEvents: sectionPhase > 0.85 ? "auto" : "none",
             }}
           >
             <div
-              className="font-outfit"
               style={{
-                fontSize:   "clamp(11px, 1.1vw, 12px)",
-                lineHeight: 2.2,
-                color:      "rgba(220,220,220,0.72)",
+                opacity:      stagger(0),
+                transform:    `translateY(${(1 - stagger(0)) * 18}px)`,
+                textAlign:    "center",
+                marginBottom: "12px",
+                transition:   "none",
               }}
             >
-              {navLinks.map((link, i, arr) => (
-                <span key={link.href}>
-                  <Link
+              <h1
+                className="font-outfit font-bold leading-none break-words"
+                style={{
+                  fontSize:      "clamp(36px, 7vw, 64px)",
+                  letterSpacing: "-0.025em",
+                  color:         "#ffffff",
+                  textShadow:    "0 2px 24px rgba(0,0,0,0.8)",
+                }}
+              >
+                <TypedText />
+                <span className="animate-cursor" style={{ color: "#ffffff" }}>_</span>
+              </h1>
+            </div>
+            <div
+              style={{
+                opacity:      stagger(1),
+                transform:    `translateY(${(1 - stagger(1)) * 18}px)`,
+                textAlign:    "center",
+                marginBottom: "14px",
+              }}
+            >
+              <p
+                className="font-inter font-semibold leading-relaxed"
+                style={{
+                  fontSize:   "clamp(11px, 1.3vw, 13px)",
+                  color:      "rgba(200,200,200,0.85)",
+                  textShadow: "0 1px 12px rgba(0,0,0,0.9)",
+                }}
+              >
+                Informatics Engineering Student ; Developer &amp; Builder<br />
+                Tech &amp; Cybersecurity Enthusiast ; Research
+              </p>
+            </div>
+            <div
+              style={{
+                opacity:      stagger(2),
+                transform:    `translateY(${(1 - stagger(2)) * 18}px)`,
+                textAlign:    "center",
+                marginBottom: "40px",
+              }}
+            >
+              <div
+                className="font-outfit"
+                style={{
+                  fontSize:   "clamp(11px, 1.1vw, 12px)",
+                  lineHeight: 2.2,
+                  color:      "rgba(220,220,220,0.72)",
+                }}
+              >
+                {navLinks.map((link, i, arr) => (
+                  <span key={link.href}>
+                    <Link
+                      href={link.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      style={{
+                        color:          "inherit",
+                        textDecoration: "none",
+                        transition:     "color 0.2s",
+                      }}
+                      onMouseEnter={e => {
+                        e.currentTarget.style.color               = "#ffffff";
+                        e.currentTarget.style.textDecoration      = "underline";
+                        e.currentTarget.style.textDecorationColor = "rgba(255,255,255,0.50)";
+                        e.currentTarget.style.textUnderlineOffset = "3px";
+                      }}
+                      onMouseLeave={e => {
+                        e.currentTarget.style.color          = "inherit";
+                        e.currentTarget.style.textDecoration = "none";
+                      }}
+                    >
+                      {link.label}
+                    </Link>
+                    {i < arr.length - 1 && (
+                      <span style={{ margin: "0 8px", color: "rgba(255,255,255,0.28)" }}>;</span>
+                    )}
+                  </span>
+                ))}
+              </div>
+            </div>
+            <div
+              style={{
+                opacity:   stagger(3),
+                transform: `translateY(${(1 - stagger(3)) * 18}px)`,
+              }}
+            >
+              <div
+                className="flex items-center justify-center flex-wrap"
+                style={{ gap: "18px" }}
+              >
+                {socialLinks.map(link => (
+                  <FooterIcon
+                    key={link.alt}
                     href={link.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    style={{
-                      color:          "inherit",
-                      textDecoration: "none",
-                      transition:     "color 0.2s",
-                    }}
-                    onMouseEnter={e => {
-                      e.currentTarget.style.color                 = "#ffffff";
-                      e.currentTarget.style.textDecoration        = "underline";
-                      e.currentTarget.style.textDecorationColor   = "rgba(255,255,255,0.50)";
-                      e.currentTarget.style.textUnderlineOffset   = "3px";
-                    }}
-                    onMouseLeave={e => {
-                      e.currentTarget.style.color          = "inherit";
-                      e.currentTarget.style.textDecoration = "none";
-                    }}
-                  >
-                    {link.label}
-                  </Link>
-                  {i < arr.length - 1 && (
-                    <span style={{ margin: "0 8px", color: "rgba(255,255,255,0.28)" }}>;</span>
-                  )}
-                </span>
-              ))}
+                    tooltip={link.tooltip}
+                    src={link.src}
+                    alt={link.alt}
+                  />
+                ))}
+              </div>
             </div>
           </div>
-
-          <div
-            style={{
-              opacity:   stagger(3),
-              transform: `translateY(${(1 - stagger(3)) * 18}px)`,
-            }}
-          >
-            <div
-              className="flex items-center justify-center flex-wrap"
-              style={{ gap: "18px" }}
-            >
-              {socialLinks.map(link => (
-                <FooterIcon
-                  key={link.alt}
-                  href={link.href}
-                  tooltip={link.tooltip}
-                  src={link.src}
-                  alt={link.alt}
-                />
-              ))}
-            </div>
-          </div>
-        </div>
+        </>
       )}
-
       {hintOpacity > 0.01 && (
         <div
           className="fixed bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center pointer-events-none select-none"

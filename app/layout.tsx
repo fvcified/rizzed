@@ -15,7 +15,7 @@ const inter = Inter({
 });
 
 export const viewport: Viewport = {
-  themeColor: '#000000',
+  themeColor: 'rgb(8,7,6)',
 };
 
 export const metadata: Metadata = {
@@ -45,10 +45,22 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" style={{ background: "#000" }}>
+    <html
+      lang="en"
+      style={{
+        colorScheme:     "dark",
+        backgroundColor: "rgb(8,7,6)",
+      }}
+    >
       <body
         className={`${outfit.variable} ${inter.variable} min-h-screen w-full overflow-x-hidden`}
-        style={{ background: "#000", color: "#fff", margin: 0, padding: 0 }}
+        style={{
+          margin:          0,
+          padding:         0,
+          color:           "#fff",
+          backgroundColor: "rgb(8,7,6)",
+          backgroundAttachment: "fixed",
+        }}
       >
         {children}
       </body>
