@@ -2,9 +2,17 @@
 @tailwind components;
 @tailwind utilities;
 
+html,
+body {
+  background: #000 !important;
+  color: #fff;
+  margin: 0;
+  padding: 0;
+}
+
 @keyframes fadeCur {
   0%, 100% { opacity: 0; }
-  50% { opacity: 1; }
+  50%       { opacity: 1; }
 }
 
 .animate-cursor {
@@ -22,20 +30,31 @@
   left: 50%;
   transform: translateX(-50%);
   background: #3a3a3a;
-  color: #ffffff;
+  color: rgba(195, 190, 185, 1);
   font-family: var(--font-outfit), "Outfit", sans-serif;
   font-size: 12px;
   padding: 6px 10px;
   border-radius: 8px;
   white-space: nowrap;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.8);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
   opacity: 0;
   pointer-events: none;
-  transition: opacity 0.2s ease-in-out, transform 0.2s ease-in-out;
+  transition: opacity 0.2s ease-in-out;
   z-index: 10;
 }
 
 .footer-icon:hover::before {
   opacity: 1;
-  transform: translateX(-50%) scale(1);
+}
+
+.footer-icon-img {
+  filter: brightness(0)
+          saturate(100%)
+          invert(77%)
+          sepia(6%)
+          saturate(180%)
+          hue-rotate(10deg)
+          brightness(95%);
+  opacity: 0.88;
+  transition: filter 0.25s ease, opacity 0.25s ease;
 }

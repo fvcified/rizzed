@@ -15,8 +15,8 @@ const inter = Inter({
 });
 
 export const viewport: Viewport = {
-  themeColor: '#6E0F1A',
-}
+  themeColor: '#000000',
+};
 
 export const metadata: Metadata = {
   title: "rizzed",
@@ -45,9 +45,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" style={{ background: "#000" }}>
       <body
-        className={`${outfit.variable} ${inter.variable} bg-[#efefef] min-h-screen w-full flex items-center justify-center overflow-x-hidden`}
+        className={`${outfit.variable} ${inter.variable} min-h-screen w-full overflow-x-hidden`}
+        style={{ background: "#000", color: "#fff", margin: 0, padding: 0 }}
       >
         {children}
       </body>

@@ -22,11 +22,7 @@ export default function FooterIcon({ href, tooltip, src, alt }: FooterIconProps)
         alt={alt}
         width={32}
         height={32}
-        className="
-          w-8 h-8 cursor-pointer
-          brightness-0 saturate-100 invert-[26%]
-          transition-all duration-300 ease-in-out
-        "
+        className="footer-icon-img w-8 h-8 cursor-pointer transition-all duration-300 ease-in-out"
       />
     </Link>
   );
