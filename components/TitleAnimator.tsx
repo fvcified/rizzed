@@ -2,7 +2,7 @@
 
 import { useEffect } from "react";
 
-const titleTxt = "./rizzed";
+const tiTxt = "./rizzed";
 
 export default function TitleAnimator() {
   useEffect(() => {
@@ -13,15 +13,15 @@ export default function TitleAnimator() {
     let timer: ReturnType<typeof setTimeout>;
 
     function titleTtl() {
-      if (!rvrs && j < titleTxt.length) {
-        document.title = titleTxt.substring(0, j + 2);
+      if (!rvrs && j < tiTxt.length) {
+        document.title = tiTxt.substring(0, j + 2);
         j++;
       } else if (rvrs && j >= 0) {
-        document.title = titleTxt.substring(0, j + 2);
+        document.title = tiTxt.substring(0, j + 2);
         j--;
       } else {
         rvrs = !rvrs;
-        j = rvrs ? titleTxt.length - 2 : 0;
+        j = rvrs ? tiTxt.length - 2 : 0;
       }
       timer = setTimeout(titleTtl, 300);
     }

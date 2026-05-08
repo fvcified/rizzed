@@ -1,9 +1,9 @@
 import Link from "next/link";
 import TypedText from "@/components/TypedText";
 import TitleAnimator from "@/components/TitleAnimator";
-import FooterIcon from "@/components/FooterIcon";
+import Icons from "@/components/Icons";
 
-const socialLinks = [
+const sociaLinks = [
   {  
     href: "https://discord.com/users/385617865820209172",
     tooltip: "discord/fvcified",
@@ -123,8 +123,8 @@ export default function Home() {
             </div>
 
             <div className="flex items-center justify-center flex-wrap gap-[1.3em] mt-5 pt-5">
-              {socialLinks.map((link) => (
-                <FooterIcon
+              {sociaLinks.map((link) => (
+                <Icons
                   key={link.alt}
                   href={link.href}
                   tooltip={link.tooltip}

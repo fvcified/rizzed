@@ -1,14 +1,14 @@
 import Image from "next/image";
 import Link from "next/link";
 
-interface FooterIconProps {
+interface IconProps {
   href: string;
   tooltip: string;
   src: string;
   alt: string;
 }
 
-export default function FooterIcon({ href, tooltip, src, alt }: FooterIconProps) {
+export default function Icons({ href, tooltip, src, alt }: IconProps) {
   return (
     <Link
       href={href}

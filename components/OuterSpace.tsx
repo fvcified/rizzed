@@ -64,12 +64,7 @@ export default function OuterSpace({ scrollProgress, onTargetInfo }: Props) {
 
     ctx.clearRect(0, 0, W, H);
 
-    const bgGrad = ctx.createRadialGradient(W / 2, H / 2, 0, W / 2, H / 2, Math.max(W, H) * 0.65);
-    bgGrad.addColorStop(0.00, "rgb(22, 19, 16)");
-    bgGrad.addColorStop(0.30, "rgb(15, 13, 11)");
-    bgGrad.addColorStop(0.60, "rgb(10,  9,  8)");
-    bgGrad.addColorStop(1.00, "rgb( 5,  4,  4)");
-    ctx.fillStyle = bgGrad;
+    ctx.fillStyle = "rgb(8,7,6)";
     ctx.fillRect(0, 0, W, H);
 
     for (let i = 0; i < 720; i++) {
@@ -138,12 +133,17 @@ export default function OuterSpace({ scrollProgress, onTargetInfo }: Props) {
       ctx.arc(px, py, r, 0, Math.PI * 2);
       ctx.clip();
 
-      const matte = ctx.createRadialGradient(px, py, 0, px, py, r);
-      matte.addColorStop(0.0, "rgb(16,15,13)");
-      matte.addColorStop(0.6, "rgb(11,10,9)");
-      matte.addColorStop(1.0, "rgb(8,7,6)");
-      ctx.fillStyle = matte;
-      ctx.fillRect(px - r, py - r, r * 2, r * 2);
+      if (isTarget) {
+        ctx.fillStyle = "rgb(8,7,6)";
+        ctx.fillRect(px - r, py - r, r * 2, r * 2);
+      } else {
+        const matte = ctx.createRadialGradient(px, py, 0, px, py, r);
+        matte.addColorStop(0.0, "rgb(16,15,13)");
+        matte.addColorStop(0.6, "rgb(11,10,9)");
+        matte.addColorStop(1.0, "rgb(8,7,6)");
+        ctx.fillStyle = matte;
+        ctx.fillRect(px - r, py - r, r * 2, r * 2);
+      }
 
       const litFade = isTarget
         ? Math.max(0, 1 - Math.max(0, (zoomPhase - 0.68) / 0.22))
@@ -205,8 +205,8 @@ export default function OuterSpace({ scrollProgress, onTargetInfo }: Props) {
       });
 
     {
-      const R        = 42;
-      const sunFade  = Math.max(0, 1 - Math.max(0, (zoomPhase - 0.58) / 0.28));
+      const R       = 42;
+      const sunFade = Math.max(0, 1 - Math.max(0, (zoomPhase - 0.58) / 0.28));
       if (sunFade > 0) {
         ctx.globalAlpha = sunFade;
         const corona = ctx.createRadialGradient(cx, cy, R * 0.75, cx, cy, R * 3.6);
@@ -273,7 +273,7 @@ export default function OuterSpace({ scrollProgress, onTargetInfo }: Props) {
     <canvas
       ref={canvasRef}
       className="fixed inset-0 w-full h-full pointer-events-none"
-      style={{ zIndex: 0, background: "radial-gradient(ellipse at 50% 50%, rgb(22,19,16) 0%, rgb(10,9,8) 55%, rgb(5,4,4) 100%)" }}
+      style={{ zIndex: 0 }}
     />
   );
 }
