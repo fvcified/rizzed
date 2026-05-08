@@ -111,3 +111,4 @@ export default function TypedText() {
 
   return <span ref={textRef} />;
 }
+d
