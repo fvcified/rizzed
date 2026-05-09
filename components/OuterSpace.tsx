@@ -130,15 +130,20 @@ export default function OuterSpace({ scrollProgress, onTargetInfo }: Props) {
     const drawOrbitFrontOutsidePlanet = (
       orb: { rx: number; ry: number },
       planetX: number, planetY: number, planetR: number,
+      skipPlanetClip = false,
     ) => {
       ctx.save();
       ctx.beginPath();
       ctx.rect(-99999, cy, 99999 * 2, 99999);
       ctx.clip();
-      ctx.beginPath();
-      ctx.rect(-99999, -99999, 99999 * 2, 99999 * 2);
-      ctx.arc(planetX, planetY, planetR, 0, Math.PI * 2, true);
-      ctx.clip("evenodd");
+
+      if (!skipPlanetClip) {
+        ctx.beginPath();
+        ctx.rect(-99999, -99999, 99999 * 2, 99999 * 2);
+        ctx.arc(planetX, planetY, planetR, 0, Math.PI * 2, true);
+        ctx.clip("evenodd");
+      }
+
       buildEllipsePath(orb);
       ctx.strokeStyle = ORBIT_COLOR;
       ctx.lineWidth   = ORBIT_LW / zoomScale;
@@ -249,8 +254,8 @@ export default function OuterSpace({ scrollProgress, onTargetInfo }: Props) {
     {
       const { px, py } = wpos(tp);
       drawOrbitBack(scaledOrbits[tp.oi]);
+      drawOrbitFrontOutsidePlanet(scaledOrbits[tp.oi], px, py, tp.r, true);
       drawPlanetBody(px, py, tp.r, true);
-      drawOrbitFrontOutsidePlanet(scaledOrbits[tp.oi], px, py, tp.r);
       drawTargetGlow(px, py, tp.r);
     }
 
