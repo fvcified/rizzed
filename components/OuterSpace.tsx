@@ -11,7 +11,7 @@ const ORBITS = [
 
 
 const PLANETS = [
-  { oi: 1, angle: Math.PI * 0, r: 32, isTarget: false },
+  { oi: 1, angle: Math.PI * 0.1, r: 32, isTarget: false },
   { oi: 2, angle: Math.PI * 0.50, r: 68, isTarget: true  },
   { oi: 0, angle: Math.PI * 1, r: 18, isTarget: false },
 ];
