@@ -2,18 +2,18 @@
 
 import { useEffect, useRef, useCallback } from "react";
 
+
 const ORBITS = [
-  { rx: 95,  ry: 36  },
   { rx: 220, ry: 84  },
   { rx: 375, ry: 143 },
   { rx: 560, ry: 213 },
 ];
 
+
 const PLANETS = [
-  { oi: 0, angle: Math.PI * 1.22, r: 20,  isTarget: false },
-  { oi: 1, angle: Math.PI * 0.06, r: 18,  isTarget: false },
-  { oi: 2, angle: Math.PI * 1.78, r: 32,  isTarget: false },
-  { oi: 3, angle: Math.PI * 0.50, r: 68,  isTarget: true  },
+  { oi: 1, angle: Math.PI * 0, r: 32, isTarget: false },
+  { oi: 2, angle: Math.PI * 0.50, r: 68, isTarget: true  },
+  { oi: 0, angle: Math.PI * 1, r: 18, isTarget: false },
 ];
 
 export const SECTION_START = 0.88;
@@ -64,7 +64,12 @@ export default function OuterSpace({ scrollProgress, onTargetInfo }: Props) {
 
     ctx.clearRect(0, 0, W, H);
 
-    ctx.fillStyle = "rgb(8,7,6)";
+    const bgGrad = ctx.createRadialGradient(W / 2, H / 2, 0, W / 2, H / 2, Math.max(W, H) * 0.65);
+    bgGrad.addColorStop(0.00, "rgb(22,19,16)");
+    bgGrad.addColorStop(0.30, "rgb(15,13,11)");
+    bgGrad.addColorStop(0.60, "rgb(10,9,8)");
+    bgGrad.addColorStop(1.00, "rgb(5,4,4)");
+    ctx.fillStyle = bgGrad;
     ctx.fillRect(0, 0, W, H);
 
     for (let i = 0; i < 720; i++) {
@@ -96,33 +101,53 @@ export default function OuterSpace({ scrollProgress, onTargetInfo }: Props) {
       py: cy + scaledOrbits[p.oi].ry * Math.sin(p.angle),
     });
 
-    const strokeOrbitAroundPlanet = (
-      orb: { rx: number; ry: number },
-      planetX: number, planetY: number,
-      planetR: number,
-    ) => {
-      const steps = 1440;
-      ctx.strokeStyle = "rgba(255,255,255,0.65)";
-      ctx.lineWidth   = 0.55 / zoomScale;
-      let drawing = false;
-      for (let i = 0; i <= steps; i++) {
-        const a  = (i / steps) * Math.PI * 2;
+    const ORBIT_COLOR = "rgba(255,255,255,0.65)";
+    const ORBIT_LW    = 0.55;
+
+    const buildEllipsePath = (orb: { rx: number; ry: number }) => {
+      ctx.beginPath();
+      for (let i = 0; i <= 360; i++) {
+        const a  = (i / 360) * Math.PI * 2;
         const ex = cx + orb.rx * Math.cos(a);
         const ey = cy + orb.ry * Math.sin(a);
-        const inside = Math.hypot(ex - planetX, ey - planetY) < planetR;
-        if (!inside) {
-          if (!drawing) { ctx.beginPath(); ctx.moveTo(ex, ey); drawing = true; }
-          else ctx.lineTo(ex, ey);
-        } else {
-          if (drawing) { ctx.stroke(); drawing = false; }
-        }
+        if (i === 0) ctx.moveTo(ex, ey); else ctx.lineTo(ex, ey);
       }
-      if (drawing) ctx.stroke();
+      ctx.closePath();
+    };
+
+    const drawOrbitBack = (orb: { rx: number; ry: number }) => {
+      ctx.save();
+      ctx.beginPath();
+      ctx.rect(-99999, -99999, 99999 * 2, cy + 99999);
+      ctx.clip();
+      buildEllipsePath(orb);
+      ctx.strokeStyle = ORBIT_COLOR;
+      ctx.lineWidth   = ORBIT_LW / zoomScale;
+      ctx.stroke();
+      ctx.restore();
+    };
+
+    const drawOrbitFrontOutsidePlanet = (
+      orb: { rx: number; ry: number },
+      planetX: number, planetY: number, planetR: number,
+    ) => {
+      ctx.save();
+      ctx.beginPath();
+      ctx.rect(-99999, cy, 99999 * 2, 99999);
+      ctx.clip();
+      ctx.beginPath();
+      ctx.rect(-99999, -99999, 99999 * 2, 99999 * 2);
+      ctx.arc(planetX, planetY, planetR, 0, Math.PI * 2, true);
+      ctx.clip("evenodd");
+      buildEllipsePath(orb);
+      ctx.strokeStyle = ORBIT_COLOR;
+      ctx.lineWidth   = ORBIT_LW / zoomScale;
+      ctx.stroke();
+      ctx.restore();
     };
 
     const drawPlanetBody = (px: number, py: number, r: number, isTarget: boolean) => {
-      const dx   = cx - px;
-      const dy   = cy - py;
+      const dx   = cx - px, dy = cy - py;
       const dist = Math.hypot(dx, dy) || 1;
       const nx   = dx / dist, ny = dy / dist;
       const litX = px + nx * r, litY = py + ny * r;
@@ -133,17 +158,12 @@ export default function OuterSpace({ scrollProgress, onTargetInfo }: Props) {
       ctx.arc(px, py, r, 0, Math.PI * 2);
       ctx.clip();
 
-      if (isTarget) {
-        ctx.fillStyle = "rgb(8,7,6)";
-        ctx.fillRect(px - r, py - r, r * 2, r * 2);
-      } else {
-        const matte = ctx.createRadialGradient(px, py, 0, px, py, r);
-        matte.addColorStop(0.0, "rgb(16,15,13)");
-        matte.addColorStop(0.6, "rgb(11,10,9)");
-        matte.addColorStop(1.0, "rgb(8,7,6)");
-        ctx.fillStyle = matte;
-        ctx.fillRect(px - r, py - r, r * 2, r * 2);
-      }
+      const matte = ctx.createRadialGradient(px, py, 0, px, py, r);
+      matte.addColorStop(0.0, "rgb(16,15,13)");
+      matte.addColorStop(0.6, "rgb(11,10,9)");
+      matte.addColorStop(1.0, "rgb(8,7,6)");
+      ctx.fillStyle = matte;
+      ctx.fillRect(px - r, py - r, r * 2, r * 2);
 
       const litFade = isTarget
         ? Math.max(0, 1 - Math.max(0, (zoomPhase - 0.68) / 0.22))
@@ -160,39 +180,31 @@ export default function OuterSpace({ scrollProgress, onTargetInfo }: Props) {
         ctx.fillStyle = grad;
         ctx.fillRect(px - r, py - r, r * 2, r * 2);
       }
-
       ctx.restore();
     };
 
     const drawTargetGlow = (px: number, py: number, r: number) => {
       const glowPhase = Math.max(0, (zoomPhase - 0.75) / 0.25);
       if (glowPhase <= 0) return;
-
       ctx.save();
-
       ctx.beginPath();
       ctx.rect(-W, -H, W * 3, H * 3);
       ctx.arc(px, py, r, 0, Math.PI * 2, true);
       ctx.clip("evenodd");
-
       const rim = ctx.createRadialGradient(px, py, r, px, py, r * 2.2);
       rim.addColorStop(0.0, `rgba(255,255,255,${(0.30 * glowPhase).toFixed(3)})`);
       rim.addColorStop(0.4, `rgba(255,255,255,${(0.10 * glowPhase).toFixed(3)})`);
       rim.addColorStop(1.0, "rgba(255,255,255,0)");
       ctx.beginPath();
       ctx.arc(px, py, r * 2.2, 0, Math.PI * 2);
-      ctx.fillStyle = rim;
-      ctx.fill();
-
+      ctx.fillStyle = rim; ctx.fill();
       const halo = ctx.createRadialGradient(px, py, r, px, py, r * 5.0);
       halo.addColorStop(0.0, `rgba(255,255,255,${(0.12 * glowPhase).toFixed(3)})`);
       halo.addColorStop(0.4, `rgba(255,255,255,${(0.04 * glowPhase).toFixed(3)})`);
       halo.addColorStop(1.0, "rgba(255,255,255,0)");
       ctx.beginPath();
       ctx.arc(px, py, r * 5.0, 0, Math.PI * 2);
-      ctx.fillStyle = halo;
-      ctx.fill();
-
+      ctx.fillStyle = halo; ctx.fill();
       ctx.restore();
     };
 
@@ -200,8 +212,9 @@ export default function OuterSpace({ scrollProgress, onTargetInfo }: Props) {
       .filter(p => Math.sin(p.angle) < 0 && !p.isTarget)
       .forEach(p => {
         const { px, py } = wpos(p);
-        strokeOrbitAroundPlanet(scaledOrbits[p.oi], px, py, p.r);
+        drawOrbitBack(scaledOrbits[p.oi]);
         drawPlanetBody(px, py, p.r, false);
+        drawOrbitFrontOutsidePlanet(scaledOrbits[p.oi], px, py, p.r);
       });
 
     {
@@ -215,12 +228,10 @@ export default function OuterSpace({ scrollProgress, onTargetInfo }: Props) {
         corona.addColorStop(1,   "rgba(255,255,255,0.00)");
         ctx.beginPath();
         ctx.arc(cx, cy, R * 3.6, 0, Math.PI * 2);
-        ctx.fillStyle = corona;
-        ctx.fill();
+        ctx.fillStyle = corona; ctx.fill();
         ctx.beginPath();
         ctx.arc(cx, cy, R, 0, Math.PI * 2);
-        ctx.fillStyle = "#ececec";
-        ctx.fill();
+        ctx.fillStyle = "#ececec"; ctx.fill();
         ctx.globalAlpha = 1;
       }
     }
@@ -230,14 +241,16 @@ export default function OuterSpace({ scrollProgress, onTargetInfo }: Props) {
       .sort((a, b) => Math.sin(a.angle) - Math.sin(b.angle))
       .forEach(p => {
         const { px, py } = wpos(p);
-        strokeOrbitAroundPlanet(scaledOrbits[p.oi], px, py, p.r);
+        drawOrbitBack(scaledOrbits[p.oi]);
         drawPlanetBody(px, py, p.r, false);
+        drawOrbitFrontOutsidePlanet(scaledOrbits[p.oi], px, py, p.r);
       });
 
     {
       const { px, py } = wpos(tp);
-      strokeOrbitAroundPlanet(scaledOrbits[tp.oi], px, py, tp.r);
+      drawOrbitBack(scaledOrbits[tp.oi]);
       drawPlanetBody(px, py, tp.r, true);
+      drawOrbitFrontOutsidePlanet(scaledOrbits[tp.oi], px, py, tp.r);
       drawTargetGlow(px, py, tp.r);
     }
 
@@ -273,7 +286,7 @@ export default function OuterSpace({ scrollProgress, onTargetInfo }: Props) {
     <canvas
       ref={canvasRef}
       className="fixed inset-0 w-full h-full pointer-events-none"
-      style={{ zIndex: 0 }}
+      style={{ zIndex: 0, background: "radial-gradient(ellipse at 50% 50%, rgb(22,19,16) 0%, rgb(10,9,8) 55%, rgb(5,4,4) 100%)" }}
     />
   );
 }
