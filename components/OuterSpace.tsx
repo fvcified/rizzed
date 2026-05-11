@@ -104,7 +104,7 @@ export default function OuterSpace({ scrollProgress, onTargetInfo }: Props) {
     const ORBIT_COLOR = "rgba(255,255,255,0.65)";
     const ORBIT_LW    = 0.55;
 
-    const buildEllipsePath = (orb: { rx: number; ry: number }) => {
+    const Ellpath = (orb: { rx: number; ry: number }) => {
       ctx.beginPath();
       for (let i = 0; i <= 360; i++) {
         const a  = (i / 360) * Math.PI * 2;
@@ -115,12 +115,12 @@ export default function OuterSpace({ scrollProgress, onTargetInfo }: Props) {
       ctx.closePath();
     };
 
-    const drawOrbitBack = (orb: { rx: number; ry: number }) => {
+    const drawOrback = (orb: { rx: number; ry: number }) => {
       ctx.save();
       ctx.beginPath();
       ctx.rect(-99999, -99999, 99999 * 2, cy + 99999);
       ctx.clip();
-      buildEllipsePath(orb);
+      Ellpath(orb);
       ctx.strokeStyle = ORBIT_COLOR;
       ctx.lineWidth   = ORBIT_LW / zoomScale;
       ctx.stroke();
@@ -144,7 +144,7 @@ export default function OuterSpace({ scrollProgress, onTargetInfo }: Props) {
         ctx.clip("evenodd");
       }
 
-      buildEllipsePath(orb);
+      Ellpath(orb);
       ctx.strokeStyle = ORBIT_COLOR;
       ctx.lineWidth   = ORBIT_LW / zoomScale;
       ctx.stroke();
@@ -217,7 +217,7 @@ export default function OuterSpace({ scrollProgress, onTargetInfo }: Props) {
       .filter(p => Math.sin(p.angle) < 0 && !p.isTarget)
       .forEach(p => {
         const { px, py } = wpos(p);
-        drawOrbitBack(scaledOrbits[p.oi]);
+        drawOrback(scaledOrbits[p.oi]);
         drawPlanetBody(px, py, p.r, false);
         drawOrbitFrontOutsidePlanet(scaledOrbits[p.oi], px, py, p.r);
       });
@@ -246,14 +246,14 @@ export default function OuterSpace({ scrollProgress, onTargetInfo }: Props) {
       .sort((a, b) => Math.sin(a.angle) - Math.sin(b.angle))
       .forEach(p => {
         const { px, py } = wpos(p);
-        drawOrbitBack(scaledOrbits[p.oi]);
+        drawOrback(scaledOrbits[p.oi]);
         drawPlanetBody(px, py, p.r, false);
         drawOrbitFrontOutsidePlanet(scaledOrbits[p.oi], px, py, p.r);
       });
 
     {
       const { px, py } = wpos(tp);
-      drawOrbitBack(scaledOrbits[tp.oi]);
+      drawOrback(scaledOrbits[tp.oi]);
       drawOrbitFrontOutsidePlanet(scaledOrbits[tp.oi], px, py, tp.r, true);
       drawPlanetBody(px, py, tp.r, true);
       drawTargetGlow(px, py, tp.r);
