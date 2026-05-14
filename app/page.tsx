@@ -17,8 +17,9 @@ const sociaLinks = [
 
 const links = [
   { href: "https://dontasktoask.com/",      label: "dontasktoask"   },
-  { href: "https://rizzedpage.vercel.app/", label: "{ fvkid.site }" },
+  { href: "https://fvkid.xyz/",             label: "{fvkid.site}"   },
   { href: "https://itsmy.gitbook.io/user/", label: "README"         },
+  { href: "https://rizzedpage.vercel.app/", label: "{rizzedpage}"   },
   { href: "https://noskid.today/",          label: "no fvskid"      },
 ];
 
