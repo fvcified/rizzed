@@ -19,7 +19,7 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
-  title: "rizzed",
+  title: "rizz..",
   description: "A rizzed kid",
   authors: [{ name: "Xiao Xli" }],
   keywords: ["rizzed"],
