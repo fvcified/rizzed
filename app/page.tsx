@@ -8,7 +8,7 @@ import Icons from "@/components/Icons";
 import OuterSpace, { type TargetInfo, SECTION_START } from "@/components/OuterSpace";
 
 const sociaLinks = [
-  { href: "https://discord.com/users/385617865820209172", tooltip: "discord/fvcified", src: "/images/discord.svg", alt: "Discord" },
+  { href: "https://discord.com/users/634719440184803339", tooltip: "discord/fvkid", src: "/images/discord.svg", alt: "Discord" },
   { href: "https://github.com/fvcified",                  tooltip: "github/fvcified",  src: "/images/github.svg",  alt: "GitHub"  },
   { href: "https://open.spotify.com/user/31gupde4ngfbbksvy5q6pb6b2474", tooltip: "Spotify", src: "/images/spotify.svg", alt: "Spotify" },
   { href: "https://gitlab.com/fvcified",                  tooltip: "gitlab/fvcified",  src: "/images/gitlab.svg",  alt: "GitLab"  },
