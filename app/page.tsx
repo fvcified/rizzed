@@ -93,7 +93,7 @@ export default function Home() {
               style={{ fontSize: "clamp(11px,1.3vw,13px)", color: "rgba(200,200,200,0.85)", textShadow: "0 1px 12px rgba(0,0,0,0.9)" }}
             >
               Informatics Engineering Student ; Developer &amp; Builder<br />
-              Tech &amp; Cybersecurity Enthusiast ; Research
+              Tech &amp; Cybersecurity Enthusiast ; Researcher
             </p>
           </div>
           <div style={{ opacity: stagger(2), transform: `translateY(${(1-stagger(2))*18}px)`, textAlign: "center", marginBottom: "40px" }}>
