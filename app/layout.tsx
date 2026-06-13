@@ -29,7 +29,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "rizzed",
     description: "A rizzed kid",
-    url: "https://fvkid.xyz/",
+    url: "https://qwertyu.is-a.dev/",
     type: "website",
   },
   twitter: {
