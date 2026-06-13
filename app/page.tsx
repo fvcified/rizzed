@@ -8,18 +8,17 @@ import Icons from "@/components/Icons";
 import OuterSpace, { type TargetInfo, SECTION_START } from "@/components/OuterSpace";
 
 const sociaLinks = [
-  { href: "https://discord.com/users/634719440184803339", tooltip: "discord/fvkid", src: "/images/discord.svg", alt: "Discord" },
-  { href: "https://github.com/fvcified",                  tooltip: "github/fvcified",  src: "/images/github.svg",  alt: "GitHub"  },
-  { href: "https://open.spotify.com/user/31gupde4ngfbbksvy5q6pb6b2474", tooltip: "Spotify", src: "/images/spotify.svg", alt: "Spotify" },
-  { href: "https://gitlab.com/fvcified",                  tooltip: "gitlab/fvcified",  src: "/images/gitlab.svg",  alt: "GitLab"  },
-  { href: "mailto:fvskid@gmail.com",                      tooltip: "fvskid@gmail.com", src: "/images/email.svg",   alt: "Email"   },
+  { href: "https://discord.com/users/634719440184803339",               tooltip: "discord/fvkid",     src: "/images/discord.svg", alt: "Discord" },
+  { href: "https://github.com/fvcified",                                tooltip: "github/fvcified",   src: "/images/github.svg",  alt: "GitHub"  },
+  { href: "https://open.spotify.com/user/31gupde4ngfbbksvy5q6pb6b2474", tooltip: "Spotify",           src: "/images/spotify.svg", alt: "Spotify" },
+  { href: "https://gitlab.com/fvcified",                                tooltip: "gitlab/fvcified",   src: "/images/gitlab.svg",  alt: "GitLab"  },
+  { href: "mailto:fvskid@gmail.com",                                    tooltip: "fvskid@gmail.com",  src: "/images/email.svg",   alt: "Email"   },
 ];
 
 const links = [
   { href: "https://dontasktoask.com/",      label: "dontasktoask"   },
-  { href: "https://fvkid.xyz/",             label: "{ fvkid }"        },
-  { href: "https://itsmy.gitbook.io/user/", label: "README"         },
-  { href: "https://rizzedpage.vercel.app/", label: "{ rizzedpage }"   },
+  { href: "https://qwertyu.is-a.dev/",      label: "qwertyu"        },
+  { href: "https://rizzedpage.vercel.app/", label: "rizzed page"     },
   { href: "https://noskid.today/",          label: "no fvskid"      },
 ];
 
