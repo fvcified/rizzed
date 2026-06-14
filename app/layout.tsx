@@ -15,8 +15,8 @@ const inter = Inter({
 });
 
 export const viewport: Viewport = {
-  themeColor: 'rgb(8,7,6)',
-};
+  themeColor: '#6E0F1A',
+}
 
 export const metadata: Metadata = {
   title: "rizz..",
