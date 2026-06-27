@@ -19,22 +19,22 @@ export const viewport: Viewport = {
 }
 
 export const metadata: Metadata = {
-  title: "rizz..",
+  title: "rizzed 2nd",
   description: "A rizzed kid",
   authors: [{ name: "Xiao Xli" }],
-  keywords: ["rizzed"],
+  keywords: ["rizzed 2nd", "rizzed2nd"],
   icons: {
     icon: "/images/cook13.webp",
   },
   openGraph: {
-    title: "rizzed",
+    title: "rizzed 2nd",
     description: "A rizzed kid",
     url: "https://qwertyu.is-a.dev/",
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "rizzed",
+    title: "rizzed 2nd",
     description: "rizzed",
   },
 };
